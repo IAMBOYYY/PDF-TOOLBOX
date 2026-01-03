@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>PDF Toolbox | Best Free PDF Merging & Splitting Tool Online</title>
+    <meta name="description" content="Use the best free PDF merging tool to combine files. Compress PDF free online, split PDFs instantly, and extract text. No registration required. All-in-one PDF solution.">
+    <meta name="keywords" content="best pdf merging tool, free pdf merging tool, best pdf split tool free, compress pdf free online, convert pdf to text, online pdf editor, merge pdf files, extract pdf pages, word count pdf">
+    <meta name="author" content="PDF Toolbox">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="PDF Toolbox - All-in-One PDF Management">
+    <meta property="og:description" content="Merge, Split, Compress and Convert PDFs online for free. The ultimate browser-based PDF utility.">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <style>
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .tool-tab { transition: all 0.2s; position: relative; border-bottom: 2px solid transparent; }
+        .tool-tab.active { color: var(--primary); background: #eff6ff; border-bottom-color: var(--primary); }
+        .tool-section { display: none; }
+        .tool-section.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .upload-area { border: 2px dashed #cbd5e1; transition: all 0.2s ease; cursor: pointer; background: white; }
+        .upload-area:hover { border-color: var(--primary); background-color: #f0f7ff; }
+        .btn-gradient { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); transition: all 0.2s ease; }
+        .btn-gradient:hover { filter: brightness(1.1); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .btn-gradient:active { transform: scale(0.98); }
+        .toggle-btn.active { background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); color: var(--primary); }
+        footer a:hover { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex items-center justify-between h-20">
+            <a href="/" class="flex items-center gap-2">
+                <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-200">
+                    <i class="fas fa-file-pdf text-white text-2xl"></i>
+                </div>
+                <h1 class="text-2xl font-extrabold tracking-tight">PDF<span class="text-blue-600">Toolbox</span></h1>
+            </a>
+            <nav class="hidden md:flex gap-6 text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                <span class="text-green-500 flex items-center gap-1"><i class="fas fa-shield-alt"></i> Secure</span>
+                <span class="flex items-center gap-1"><i class="fas fa-bolt"></i> Fast</span>
+                <span class="flex items-center gap-1"><i class="fas fa-cloud"></i> Browser-Based</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 max-w-5xl">
+        
+        <!-- Main SEO H2 -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-black mb-4">The Ultimate <span class="text-blue-600">Free PDF Toolkit</span></h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Access the best PDF merging tool, compressor, and splitter—all in one place. Fast, free, and no file uploads to external servers.</p>
+        </div>
+
+        <!-- Tool Navigation -->
+        <div class="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border mb-10 overflow-hidden flex flex-wrap">
+            <button class="tool-tab active flex-1 min-w-[120px] px-4 py-5 font-bold text-sm uppercase" data-tool="merge"><i class="fas fa-layer-group mb-1 block text-lg"></i>Merge</button>
+            <button class="tool-tab flex-1 min-w-[120px] px-4 py-5 font-bold text-sm uppercase" data-tool="split"><i class="fas fa-scissors mb-1 block text-lg"></i>Split</button>
+            <button class="tool-tab flex-1 min-w-[120px] px-4 py-5 font-bold text-sm uppercase" data-tool="compress"><i class="fas fa-compress mb-1 block text-lg"></i>Compress</button>
+            <button class="tool-tab flex-1 min-w-[120px] px-4 py-5 font-bold text-sm uppercase" data-tool="convert"><i class="fas fa-file-code mb-1 block text-lg"></i>To Text</button>
+            <button class="tool-tab flex-1 min-w-[120px] px-4 py-5 font-bold text-sm uppercase" data-tool="wordcount"><i class="fas fa-font mb-1 block text-lg"></i>Word Count</button>
+        </div>
+
+        <!-- Tool Sections -->
+        <div id="merge" class="tool-section active">
+            <div class="bg-white rounded-3xl border p-8 md:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold mb-2">Free PDF Merging Tool</h3>
+                <p class="text-gray-500 mb-8">The most reliable way to combine multiple PDF documents into a single professional file.</p>
+                <div class="upload-area rounded-2xl p-16 text-center mb-8" id="mergeDrop">
+                    <input type="file" id="mergeIn" multiple accept=".pdf" class="hidden">
+                    <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <p class="text-xl font-bold">Drop PDF files here or Click</p>
+                    <p class="text-sm text-gray-400 mt-2">Maximum efficiency for merging large files</p>
+                </div>
+                <div id="mergeList" class="space-y-3 mb-8"></div>
+                <button id="doMerge" class="btn-gradient w-full py-5 text-white text-lg font-bold rounded-2xl disabled:grayscale shadow-lg shadow-blue-500/20" disabled>Merge Files Now</button>
+            </div>
+        </div>
+
+        <!-- Split Tool -->
+        <div id="split" class="tool-section">
+            <div class="bg-white rounded-3xl border p-8 md:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold mb-2">Best PDF Split Tool Free</h3>
+                <p class="text-gray-500 mb-8">Instantly separate every page of your PDF into individual documents with our high-speed splitter.</p>
+                <div class="upload-area rounded-2xl p-16 text-center mb-8" id="splitDrop">
+                    <input type="file" id="splitIn" accept=".pdf" class="hidden">
+                    <i class="fas fa-cut text-5xl text-blue-500 mb-4"></i>
+                    <p class="text-xl font-bold" id="splitLabel">Choose PDF to Split</p>
+                </div>
+                <button id="doSplit" class="btn-gradient w-full py-5 text-white text-lg font-bold rounded-2xl hidden">Process and Split PDF</button>
+            </div>
+        </div>
+
+        <!-- Compress Tool -->
+        <div id="compress" class="tool-section">
+            <div class="bg-white rounded-3xl border p-8 md:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold mb-2">Compress PDF Free Online</h3>
+                <p class="text-gray-500 mb-8">Reduce PDF file size without losing quality. Perfect for email attachments and web uploads.</p>
+                <div class="upload-area rounded-2xl p-16 text-center mb-8" id="compDrop">
+                    <input type="file" id="compIn" accept=".pdf" class="hidden">
+                    <i class="fas fa-compress-alt text-5xl text-blue-500 mb-4"></i>
+                    <p class="text-xl font-bold" id="compLabel">Select PDF for Compression</p>
+                </div>
+                <button id="doComp" class="btn-gradient w-full py-5 text-white text-lg font-bold rounded-2xl hidden">Compress My PDF</button>
+            </div>
+        </div>
+
+        <!-- Convert Tool -->
+        <div id="convert" class="tool-section">
+            <div class="bg-white rounded-3xl border p-8 md:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold mb-2">Convert PDF to Text Free</h3>
+                <p class="text-gray-500 mb-8">Extract text from your PDF files instantly with our precise extraction engine.</p>
+                <div class="upload-area rounded-2xl p-16 text-center mb-8" id="convDrop">
+                    <input type="file" id="convIn" accept=".pdf" class="hidden">
+                    <i class="fas fa-file-alt text-5xl text-blue-500 mb-4"></i>
+                    <p class="text-xl font-bold" id="convLabel">Upload PDF to Extract Text</p>
+                </div>
+                <button id="doConv" class="btn-gradient w-full py-5 text-white text-lg font-bold rounded-2xl hidden">Start Text Extraction</button>
+            </div>
+        </div>
+
+        <!-- Word Count Tool -->
+        <div id="wordcount" class="tool-section">
+            <div class="bg-white rounded-3xl border p-8 md:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold mb-6">Advanced Word Count Tool</h3>
+                
+                <div class="flex bg-slate-100 p-1.5 rounded-2xl mb-8 w-fit mx-auto border border-slate-200">
+                    <button id="wcToggleText" class="toggle-btn active px-6 py-2.5 rounded-xl text-sm font-extrabold transition-all uppercase tracking-tighter">Paste Text</button>
+                    <button id="wcTogglePdf" class="toggle-btn px-6 py-2.5 rounded-xl text-sm font-extrabold text-gray-400 transition-all uppercase tracking-tighter">PDF Analytics</button>
+                </div>
+
+                <div id="wcTextContainer">
+                    <textarea id="wcArea" class="w-full h-64 border-2 border-slate-100 rounded-2xl p-6 mb-8 focus:border-blue-500 focus:ring-0 transition-colors bg-slate-50 text-lg" placeholder="Type or paste your text here for instant word counting..."></textarea>
+                </div>
+
+                <div id="wcPdfContainer" class="hidden">
+                    <div class="upload-area rounded-2xl p-20 text-center mb-8 border-blue-200" id="wcPdfDrop">
+                        <input type="file" id="wcPdfIn" accept=".pdf" class="hidden">
+                        <i class="fas fa-file-invoice text-5xl text-blue-600 mb-4"></i>
+                        <p class="text-xl font-extrabold text-blue-900" id="wcPdfLabel">Click to analyze words in PDF</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm text-center">
+                        <p class="text-4xl font-black text-blue-600 mb-1" id="wCount">0</p>
+                        <p class="text-xs uppercase font-bold text-slate-400 tracking-widest">Words</p>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm text-center">
+                        <p class="text-4xl font-black text-blue-600 mb-1" id="cCount">0</p>
+                        <p class="text-xs uppercase font-bold text-slate-400 tracking-widest">Characters</p>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm text-center">
+                        <p class="text-4xl font-black text-blue-600 mb-1" id="sCount">0</p>
+                        <p class="text-xs uppercase font-bold text-slate-400 tracking-widest">Sentences</p>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm text-center">
+                        <p class="text-4xl font-black text-blue-600 mb-1" id="pCount">0</p>
+                        <p class="text-xs uppercase font-bold text-slate-400 tracking-widest">Paragraphs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content Section -->
+        <article class="mt-20 border-t pt-16">
+            <h4 class="text-3xl font-bold mb-8">Why PDF Toolbox is the Best PDF Merging and Splitting Tool</h4>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div>
+                    <h5 class="font-bold text-lg mb-3">Free PDF Merging Tool</h5>
+                    <p class="text-gray-600 leading-relaxed">Our online utility is recognized as a top choice for those seeking a <span class="font-semibold">free PDF merging tool</span>. Combine invoices, reports, or legal documents into a single professional file without paying for expensive software subscriptions.</p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-lg mb-3">Best PDF Split Tool Free</h5>
+                    <p class="text-gray-600 leading-relaxed">Need to extract specific pages? Our <span class="font-semibold">best PDF split tool free</span> edition allows you to break down huge documents into manageable parts in seconds, right in your browser.</p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-lg mb-3">Compress PDF Free Online</h5>
+                    <p class="text-gray-600 leading-relaxed">Save storage space and bypass email limits when you <span class="font-semibold">compress PDF free online</span> with our optimization engine. We ensure your documents stay clear while significantly reducing file size.</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="font-bold text-gray-400 mb-4">&copy; 2026 PDF Toolbox - Best PDF Tools Online</p>
+            <div class="flex justify-center gap-8 text-sm font-bold text-gray-500 uppercase">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global Loader -->
+    <div id="loader" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] hidden flex items-center justify-center">
+        <div class="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-sm w-full mx-4">
+            <div class="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent mx-auto mb-6"></div>
+            <p class="text-xl font-black text-slate-800 mb-2" id="loaderText">Processing...</p>
+            <p class="text-sm text-slate-500">This usually takes just a few seconds.</p>
+        </div>
+    </div>
+
+    <script>
+        const { PDFDocument } = PDFLib;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        // Tab Handling
+        document.querySelectorAll('.tool-tab').forEach(t => {
+            t.onclick = () => {
+                document.querySelectorAll('.tool-tab, .tool-section').forEach(el => el.classList.remove('active'));
+                t.classList.add('active');
+                document.getElementById(t.dataset.tool).classList.add('active');
+                window.scrollTo({ top: 150, behavior: 'smooth' });
+            };
+        });
+
+        const showLoader = (txt) => { document.getElementById('loaderText').innerText = txt; document.getElementById('loader').classList.remove('hidden'); };
+        const hideLoader = () => { document.getElementById('loader').classList.add('hidden'); };
+
+        // --- MERGE ---
+        let mergeFiles = [];
+        const mIn = document.getElementById('mergeIn'), mList = document.getElementById('mergeList'), mBtn = document.getElementById('doMerge');
+        document.getElementById('mergeDrop').onclick = () => mIn.click();
+        mIn.onchange = () => { mergeFiles = [...mergeFiles, ...Array.from(mIn.files)]; renderMerge(); mIn.value = ''; };
+        function renderMerge() {
+            mList.innerHTML = mergeFiles.map((f, i) => `
+                <div class="flex justify-between items-center p-4 bg-blue-50/50 border border-blue-100 rounded-xl group transition-all">
+                    <span class="font-bold text-blue-900 truncate"><i class="far fa-file-pdf mr-2"></i>${f.name}</span>
+                    <button onclick="mergeFiles.splice(${i},1);renderMerge()" class="text-slate-300 hover:text-red-500 transition-colors">
+                        <i class="fas fa-times-circle text-lg"></i>
+                    </button>
+                </div>`).join('');
+            mBtn.disabled = mergeFiles.length < 2;
+        }
+        mBtn.onclick = async () => {
+            showLoader("Merging Documents...");
+            try {
+                const outPdf = await PDFDocument.create();
+                for (const f of mergeFiles) {
+                    const doc = await PDFDocument.load(await f.arrayBuffer());
+                    const pages = await outPdf.copyPages(doc, doc.getPageIndices());
+                    pages.forEach(p => outPdf.addPage(p));
+                }
+                saveFile(await outPdf.save(), "merged_by_pdftoolbox.pdf");
+            } catch(e) { console.error(e); }
+            hideLoader();
+        };
+
+        // --- SPLIT ---
+        const sIn = document.getElementById('splitIn'), sBtn = document.getElementById('doSplit');
+        document.getElementById('splitDrop').onclick = () => sIn.click();
+        sIn.onchange = () => { if(sIn.files[0]) { document.getElementById('splitLabel').innerText = sIn.files[0].name; sBtn.classList.remove('hidden'); } };
+        sBtn.onclick = async () => {
+            showLoader("Splitting PDF Pages...");
+            try {
+                const zip = new JSZip();
+                const doc = await PDFDocument.load(await sIn.files[0].arrayBuffer());
+                for (let i = 0; i < doc.getPageCount(); i++) {
+                    const subDoc = await PDFDocument.create();
+                    const [p] = await subDoc.copyPages(doc, [i]);
+                    subDoc.addPage(p);
+                    zip.file(`Page_${i+1}.pdf`, await subDoc.save());
+                }
+                saveFile(await zip.generateAsync({type:"blob"}), "split_pdf_bundle.zip", true);
+            } catch(e) { console.error(e); }
+            hideLoader();
+        };
+
+        // --- COMPRESS ---
+        const cIn = document.getElementById('compIn'), cBtn = document.getElementById('doComp');
+        document.getElementById('compDrop').onclick = () => cIn.click();
+        cIn.onchange = () => { if(cIn.files[0]) { document.getElementById('compLabel').innerText = cIn.files[0].name; cBtn.classList.remove('hidden'); } };
+        cBtn.onclick = async () => {
+            showLoader("Optimizing File...");
+            const doc = await PDFDocument.load(await cIn.files[0].arrayBuffer());
+            saveFile(await doc.save({ useObjectStreams: true }), "compressed_file.pdf");
+            hideLoader();
+        };
+
+        // --- CONVERT ---
+        const cvIn = document.getElementById('convIn'), cvBtn = document.getElementById('doConv');
+        document.getElementById('convDrop').onclick = () => cvIn.click();
+        cvIn.onchange = () => { if(cvIn.files[0]) { document.getElementById('convLabel').innerText = cvIn.files[0].name; cvBtn.classList.remove('hidden'); } };
+        cvBtn.onclick = async () => {
+            showLoader("Extracting Text Content...");
+            co
