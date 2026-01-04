@@ -1,0 +1,67 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+.tool-tab {
+    transition: all 0.2s;
+    position: relative;
+    border-bottom: 2px solid transparent;
+}
+
+.tool-tab.active {
+    color: var(--primary);
+    background: #eff6ff;
+    border-bottom-color: var(--primary);
+}
+
+.tool-section {
+    display: none;
+}
+
+.tool-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background: white;
+}
+
+.upload-area:hover {
+    border-color: var(--primary);
+    background-color: #f0f7ff;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    transition: all 0.2s ease;
+}
+
+.btn-gradient:hover {
+    filter: brightness(1.1);
+}
+
+.btn-gradient:active {
+    transform: scale(0.98);
+}
+
+.toggle-btn.active {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--primary);
+}
