@@ -11,19 +11,7 @@
   <meta name="author" content="PDF Toolbox" />
   <link rel="canonical" href="https://yourdomain.com/" />
 
-  <!-- OPEN GRAPH / FACEBOOK -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com/" />
-  <meta property="og:title" content="PDF Toolbox – Professional PDF Tools in Your Browser" />
-  <meta property="og:description" content="Merge, split, and compress PDFs instantly. Privacy-first: your files never leave your computer." />
-  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
-
-  <!-- TWITTER -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="PDF Toolbox – Free Online PDF Tools" />
-  <meta property="twitter:description" content="Securely process PDF files in your browser. No uploads, no logs, 100% private." />
-
-  <!-- STRUCTURED DATA (JSON-LD) FOR GOOGLE -->
+  <!-- STRUCTURED DATA (JSON-LD) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -36,14 +24,7 @@
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
-      },
-      "featureList": [
-        "Merge PDF files",
-        "Split PDF pages",
-        "Compress PDF size",
-        "PDF to Text extraction",
-        "PDF Word Count"
-      ]
+      }
     }
   </script>
 
@@ -54,19 +35,19 @@
 
   <style>
     body { font-family: 'Inter', sans-serif; background: #f8fafc; scroll-behavior: smooth; }
-    .tool-tab { padding: 10px 16px; border-radius: 999px; background: #e5e7eb; font-weight: 700; transition: all 0.2s; cursor: pointer; }
+    .tool-tab { padding: 10px 20px; border-radius: 999px; background: #e5e7eb; font-weight: 700; transition: all 0.2s; cursor: pointer; white-space: nowrap; }
     .tool-tab.active { background: #2563eb; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
     .tool-section { display: none; }
     .tool-section.active { display: block; animation: fadeIn 0.3s ease-in; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .upload-area { border: 2px dashed #94a3b8; padding: 50px; text-align: center; border-radius: 16px; background: white; cursor: pointer; transition: all 0.2s; }
-    .upload-area:hover { border-color: #2563eb; background: #eff6ff; }
-    .btn-primary { width: 100%; padding: 14px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 16px; font-weight: 800; transition: transform 0.1s; }
+    .upload-area { border: 2px dashed #94a3b8; padding: 40px; text-align: center; border-radius: 20px; background: white; cursor: pointer; transition: all 0.2s; }
+    .upload-area:hover { border-color: #2563eb; background: #f0f7ff; }
+    .btn-primary { width: 100%; padding: 16px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 16px; font-weight: 800; transition: all 0.2s; }
     .btn-primary:active { transform: scale(0.98); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .stats-grid div { background: white; padding: 20px; border-radius: 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .stats-grid span { font-size: 28px; font-weight: 900; color: #2563eb; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stats-grid div { background: #f1f5f9; padding: 20px; border-radius: 20px; text-align: center; }
+    .stats-grid span { font-size: 32px; font-weight: 900; color: #2563eb; display: block; }
     #privacyModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
     #privacyModal.show { display: flex; }
   </style>
@@ -80,191 +61,124 @@
       PDF<span class="text-blue-600">Toolbox</span>
     </div>
     <div class="hidden md:flex space-x-6 text-sm font-semibold text-gray-600">
-        <a href="#tools" class="hover:text-blue-600">All Tools</a>
-        <a href="#faq" class="hover:text-blue-600">FAQs</a>
-        <a href="#about" class="hover:text-blue-600">Why Us?</a>
+        <a href="#tools" class="hover:text-blue-600">Tools</a>
+        <a href="#faq" class="hover:text-blue-600">FAQ</a>
     </div>
-    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Secure Browser-Based</span>
+    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold border border-blue-100">Private & Local</span>
   </nav>
 </header>
 
-<!-- HERO SECTION -->
-<section class="max-w-6xl mx-auto text-center py-16 px-4">
+<section class="max-w-6xl mx-auto text-center py-12 md:py-20 px-4">
   <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-    Professional <span class="text-blue-600">PDF Tools</span> Without the Uploads
+    Free <span class="text-blue-600">PDF Tools</span> in Your Browser
   </h1>
-  <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-    Privacy-first PDF management. Merge, split, compress, and analyze your documents 
-    instantly using your browser's power. Your data stays on your machine.
+  <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+    No uploads. No limits. Just professional PDF management that runs entirely on your device for 100% privacy.
   </p>
-  <div class="flex flex-wrap justify-center gap-4">
-      <span class="flex items-center text-sm text-gray-500"><i class="fa-solid fa-check text-blue-500 mr-2"></i> No Sign-up</span>
-      <span class="flex items-center text-sm text-gray-500"><i class="fa-solid fa-check text-blue-500 mr-2"></i> 100% Free</span>
-      <span class="flex items-center text-sm text-gray-500"><i class="fa-solid fa-check text-blue-500 mr-2"></i> Unlimited Files</span>
-  </div>
 </section>
 
-<!-- MAIN APP SECTION -->
 <main id="tools" class="max-w-5xl mx-auto px-4 pb-20">
-  <div class="tool-nav mb-8 justify-center">
-    <button class="tool-tab active" data-tool="merge" aria-label="Merge PDF Files">Merge</button>
-    <button class="tool-tab" data-tool="split" aria-label="Split PDF Pages">Split</button>
-    <button class="tool-tab" data-tool="compress" aria-label="Compress PDF Size">Compress</button>
-    <button class="tool-tab" data-tool="convert" aria-label="Convert PDF to Text">PDF → Text</button>
-    <button class="tool-tab" data-tool="wordcount" aria-label="PDF Word Counter">Word Count</button>
+  <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar justify-start md:justify-center">
+    <button class="tool-tab active" data-tool="merge">Merge</button>
+    <button class="tool-tab" data-tool="split">Split</button>
+    <button class="tool-tab" data-tool="compress">Compress</button>
+    <button class="tool-tab" data-tool="convert">PDF → Text</button>
+    <button class="tool-tab" data-tool="wordcount">Word Count</button>
   </div>
 
   <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-gray-100">
+      
       <!-- MERGE -->
       <section id="merge" class="tool-section active">
-        <h2 class="text-2xl font-bold mb-4">Merge PDF Online</h2>
-        <p class="text-gray-500 mb-6">Combine multiple PDF files into one single document in seconds.</p>
+        <h2 class="text-2xl font-bold mb-2">Merge PDF Files</h2>
+        <p class="text-gray-500 mb-6">Combine multiple PDF documents into one single file.</p>
         <div id="mergeDrop" class="upload-area">
-            <i class="fa-solid fa-file-export text-4xl text-blue-500 mb-4 block"></i>
-            <strong>Click or Drag 2+ PDFs here</strong>
+            <i class="fa-solid fa-plus-circle text-4xl text-blue-500 mb-3 block"></i>
+            <strong>Select 2 or more PDFs</strong>
         </div>
         <input type="file" id="mergeIn" accept=".pdf" multiple hidden>
         <div id="mergeList" class="mt-4 space-y-2"></div>
-        <button id="doMerge" class="btn-primary mt-6" disabled>Merge PDFs Now</button>
+        <button id="doMerge" class="btn-primary mt-6" disabled>Merge PDFs</button>
       </section>
 
       <!-- SPLIT -->
       <section id="split" class="tool-section">
-        <h2 class="text-2xl font-bold mb-4">Split PDF Pages</h2>
-        <p class="text-gray-500 mb-6">Separate your PDF into individual pages and download them as a ZIP file.</p>
-        <div id="splitDrop" class="upload-area">Upload PDF to split</div>
+        <h2 class="text-2xl font-bold mb-2">Split PDF Pages</h2>
+        <p class="text-gray-500 mb-6">Extract every page of your PDF into separate files.</p>
+        <div id="splitDrop" class="upload-area">Click to Upload PDF</div>
         <input type="file" id="splitIn" accept=".pdf" hidden>
         <div id="splitStatus" class="mt-4 text-center font-semibold text-blue-600"></div>
-        <button id="doSplit" class="btn-primary mt-4 hidden">Extract All Pages</button>
+        <button id="doSplit" class="btn-primary mt-4 hidden">Split and Download ZIP</button>
       </section>
 
       <!-- COMPRESS -->
       <section id="compress" class="tool-section">
-        <h2 class="text-2xl font-bold mb-4">Compress PDF Size</h2>
-        <p class="text-gray-500 mb-6">Reduce file size without losing quality using our local optimization algorithm.</p>
-        <div id="compDrop" class="upload-area">Upload PDF to compress</div>
+        <h2 class="text-2xl font-bold mb-2">Compress PDF</h2>
+        <p class="text-gray-500 mb-6">Reduce PDF file size without sending data to a server.</p>
+        <div id="compDrop" class="upload-area">Upload PDF to Compress</div>
         <input type="file" id="compIn" accept=".pdf" hidden>
         <div id="compStatus" class="mt-4 text-center font-semibold text-blue-600"></div>
-        <button id="doComp" class="btn-primary mt-4 hidden">Optimize File Size</button>
+        <button id="doComp" class="btn-primary mt-4 hidden">Compress Now</button>
       </section>
 
       <!-- CONVERT -->
       <section id="convert" class="tool-section">
-        <h2 class="text-2xl font-bold mb-4">Extract Text from PDF</h2>
-        <p class="text-gray-500 mb-6">Convert PDF to plain text (.txt) instantly for easy editing.</p>
-        <div id="convDrop" class="upload-area">Upload PDF to convert</div>
+        <h2 class="text-2xl font-bold mb-2">PDF to Text</h2>
+        <p class="text-gray-500 mb-6">Extract all text content from your PDF file.</p>
+        <div id="convDrop" class="upload-area">Select PDF File</div>
         <input type="file" id="convIn" accept=".pdf" hidden>
         <div id="convStatus" class="mt-4 text-center font-semibold text-blue-600"></div>
-        <button id="doConv" class="btn-primary mt-4 hidden">Download Text File</button>
+        <button id="doConv" class="btn-primary mt-4 hidden">Extract Text</button>
       </section>
 
-      <!-- WORD COUNT -->
+      <!-- WORD COUNT (RESTORED) -->
       <section id="wordcount" class="tool-section">
-        <h2 class="text-2xl font-bold mb-4">PDF Word Counter</h2>
-        <p class="text-gray-500 mb-6">Accurately count words and characters in your PDF documents.</p>
-        <div id="wcPdfDrop" class="upload-area mb-4">Upload PDF for Analysis</div>
+        <h2 class="text-2xl font-bold mb-2">PDF Word Counter</h2>
+        <p class="text-gray-500 mb-6">Analyze word density and character count in your PDF.</p>
+        
+        <!-- PDF Upload Input (RESTORED) -->
+        <div id="wcPdfDrop" class="upload-area mb-4">
+            <i class="fa-solid fa-calculator text-4xl text-blue-500 mb-3 block"></i>
+            <strong>Upload PDF to count words</strong>
+        </div>
         <input type="file" id="wcPdfIn" accept=".pdf" hidden>
-        <p class="text-center text-gray-400 my-4 font-bold">OR PASTE TEXT BELOW</p>
-        <textarea id="wcArea" placeholder="Paste your text here..." class="w-full p-6 rounded-2xl border-2 border-gray-100 h-48 focus:border-blue-500 outline-none transition-all"></textarea>
+
+        <p class="text-center text-gray-400 my-4 font-bold text-sm">OR PASTE TEXT MANUALLY</p>
+        
+        <textarea id="wcArea" placeholder="Paste text content here..." class="w-full p-6 rounded-2xl border-2 border-gray-100 h-48 focus:border-blue-500 outline-none transition-all"></textarea>
+        
         <div class="stats-grid mt-6">
-          <div><span id="wCount">0</span><p class="text-gray-400 font-bold uppercase text-xs">Total Words</p></div>
+          <div><span id="wCount">0</span><p class="text-gray-400 font-bold uppercase text-xs">Words</p></div>
           <div><span id="cCount">0</span><p class="text-gray-400 font-bold uppercase text-xs">Characters</p></div>
         </div>
       </section>
   </div>
 </main>
 
-<!-- SEO CONTENT SECTION -->
-<section id="about" class="bg-gray-900 text-white py-20 px-4">
-  <div class="max-w-5xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <h2 class="text-3xl font-black mb-6">The Secure Way to Manage PDFs</h2>
-            <p class="text-gray-400 leading-relaxed mb-4">
-                Most online PDF tools require you to upload your sensitive documents to their servers. This poses a massive privacy risk. **PDF Toolbox** is different. 
-            </p>
-            <p class="text-gray-400 leading-relaxed">
-                We use high-performance WebAssembly and JavaScript libraries to process everything on **your device**. Your data never touches a cloud, making us the top choice for legal, medical, and personal documents.
-            </p>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-            <div class="bg-gray-800 p-6 rounded-2xl">
-                <i class="fa-solid fa-shield-halved text-blue-400 text-2xl mb-4"></i>
-                <h3 class="font-bold">100% Private</h3>
-                <p class="text-xs text-gray-500">No uploads ever.</p>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-2xl">
-                <i class="fa-solid fa-bolt text-yellow-400 text-2xl mb-4"></i>
-                <h3 class="font-bold">Instant</h3>
-                <p class="text-xs text-gray-500">No server queues.</p>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-2xl">
-                <i class="fa-solid fa-infinity text-purple-400 text-2xl mb-4"></i>
-                <h3 class="font-bold">Unlimited</h3>
-                <p class="text-xs text-gray-500">No daily limits.</p>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-2xl">
-                <i class="fa-solid fa-globe text-green-400 text-2xl mb-4"></i>
-                <h3 class="font-bold">Offline Ready</h3>
-                <p class="text-xs text-gray-500">Works without net.</p>
-            </div>
-        </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ SECTION (Crucial for SEO) -->
+<!-- FAQ SECTION -->
 <section id="faq" class="py-20 px-4 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-black text-center mb-12">Frequently Asked Questions</h2>
-    <div class="space-y-6">
+    <h2 class="text-3xl font-black text-center mb-12">Common Questions</h2>
+    <div class="grid gap-6">
         <div class="bg-white p-6 rounded-2xl border border-gray-100">
-            <h3 class="font-bold text-lg mb-2">Is PDF Toolbox safe to use?</h3>
-            <p class="text-gray-600">Yes. Since all processing is done locally in your browser (client-side), your files are never transmitted over the internet to a server. This is the safest way to handle PDFs online.</p>
+            <h3 class="font-bold text-lg mb-2">How is this tool free?</h3>
+            <p class="text-gray-600">Because we don't pay for expensive servers to process your files. Your own computer does the work!</p>
         </div>
         <div class="bg-white p-6 rounded-2xl border border-gray-100">
-            <h3 class="font-bold text-lg mb-2">How much does it cost?</h3>
-            <p class="text-gray-600">PDF Toolbox is 100% free with no hidden subscriptions, no file size limits, and no "pro" versions.</p>
-        </div>
-        <div class="bg-white p-6 rounded-2xl border border-gray-100">
-            <h3 class="font-bold text-lg mb-2">Can I merge encrypted PDFs?</h3>
-            <p class="text-gray-600">Standard password-protected PDFs must be unlocked before merging. Our tool currently supports standard PDFs for merging and splitting.</p>
+            <h3 class="font-bold text-lg mb-2">Are my files private?</h3>
+            <p class="text-gray-600">Absolutely. No file ever leaves your browser. You can even use this tool offline once the page is loaded.</p>
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="bg-white border-t py-12 text-center">
-  <div class="max-w-6xl mx-auto px-4">
-      <div class="text-xl font-bold mb-6">PDF<span class="text-blue-600">Toolbox</span></div>
-      <div class="flex flex-wrap justify-center gap-8 mb-8 text-sm font-medium text-gray-500">
-          <a href="#" class="hover:text-blue-600">Home</a>
-          <button onclick="togglePrivacy()" class="hover:text-blue-600">Privacy Policy</button>
-          <a href="#" class="hover:text-blue-600">Terms of Service</a>
-          <a href="mailto:support@yourdomain.com" class="hover:text-blue-600">Contact Support</a>
-      </div>
-      <p class="text-xs text-gray-400">© 2026 PDF Toolbox. Powered by WebAssembly Technology.</p>
-  </div>
+  <p class="text-gray-500 text-sm">© 2026 PDF Toolbox – Privacy First PDF Management.</p>
 </footer>
-
-<!-- Privacy Modal -->
-<div id="privacyModal">
-    <div class="bg-white p-8 rounded-2xl max-w-lg w-full shadow-2xl">
-        <h2 class="text-2xl font-bold mb-4">Your Privacy Matters</h2>
-        <p class="mb-4 text-gray-600">At PDF Toolbox, we believe privacy is a human right. Unlike other converters, we never see your data.</p>
-        <ul class="text-sm text-gray-500 space-y-2 mb-6">
-            <li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> No files are uploaded to any server.</li>
-            <li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> No account registration required.</li>
-            <li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> No cookies track your documents.</li>
-        </ul>
-        <button onclick="togglePrivacy()" class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold">I Understand</button>
-    </div>
-</div>
 
 <!-- Loader -->
 <div id="loader" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-  <div class="bg-white p-8 rounded-3xl font-bold flex flex-col items-center shadow-2xl">
+  <div class="bg-white p-8 rounded-3xl font-bold flex flex-col items-center">
       <div class="animate-spin rounded-full h-10 w-10 border-4 border-blue-100 border-t-blue-600 mb-4"></div>
-      <span id="loaderText">Processing Your PDF...</span>
+      <span id="loaderText">Working...</span>
   </div>
 </div>
 
@@ -283,13 +197,7 @@ function showLoader(text = "Processing...") {
   $("loader").classList.remove("hidden");
 }
 
-function hideLoader() {
-  $("loader").classList.add("hidden");
-}
-
-function togglePrivacy() {
-    $("privacyModal").classList.toggle('show');
-}
+function hideLoader() { $("loader").classList.add("hidden"); }
 
 /* TAB SWITCHING */
 document.querySelectorAll(".tool-tab").forEach(tab => {
@@ -306,95 +214,110 @@ let mergeFiles = [];
 $("mergeDrop").onclick = () => $("mergeIn").click();
 $("mergeIn").onchange = e => {
   mergeFiles = [...e.target.files].filter(f => f.type === "application/pdf");
-  $("mergeList").innerHTML = mergeFiles.map(f => `<div class="p-3 bg-blue-50 border border-blue-100 rounded-xl text-sm font-medium flex items-center"><i class="fa-solid fa-file-pdf text-blue-500 mr-2"></i> ${f.name}</div>`).join("");
+  $("mergeList").innerHTML = mergeFiles.map(f => `<div class="p-3 bg-blue-50 rounded-xl text-sm font-medium">📄 ${f.name}</div>`).join("");
   $("doMerge").disabled = mergeFiles.length < 2;
 };
-
 $("doMerge").onclick = async () => {
   try {
-    showLoader("Merging PDFs locally...");
+    showLoader("Merging...");
     const mergedPdf = await PDFLib.PDFDocument.create();
     for (const file of mergeFiles) {
-      const bytes = await file.arrayBuffer();
-      const pdf = await PDFLib.PDFDocument.load(bytes);
+      const pdf = await PDFLib.PDFDocument.load(await file.arrayBuffer());
       const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
       pages.forEach(p => mergedPdf.addPage(p));
     }
-    const out = await mergedPdf.save();
-    download(out, "merged.pdf");
-  } catch (err) { alert("Error merging: " + err.message); }
-  finally { hideLoader(); }
+    download(await mergedPdf.save(), "merged.pdf");
+  } catch (err) { alert(err.message); } finally { hideLoader(); }
 };
 
 /* SPLIT */
 $("splitDrop").onclick = () => $("splitIn").click();
-$("splitIn").onchange = e => {
-    if(e.target.files.length) {
-        $("splitStatus").innerText = `Ready to split: ${e.target.files[0].name}`;
-        $("doSplit").classList.remove("hidden");
-    }
-};
+$("splitIn").onchange = e => { if(e.target.files[0]) { $("splitStatus").innerText = e.target.files[0].name; $("doSplit").classList.remove("hidden"); } };
 $("doSplit").onclick = async () => {
   try {
-    showLoader("Splitting into single pages...");
-    const file = $("splitIn").files[0];
-    const bytes = await file.arrayBuffer();
-    const pdf = await PDFLib.PDFDocument.load(bytes);
+    showLoader("Splitting...");
+    const pdf = await PDFLib.PDFDocument.load(await $("splitIn").files[0].arrayBuffer());
     const zip = new JSZip();
     for (let i = 0; i < pdf.getPageCount(); i++) {
       const newPdf = await PDFLib.PDFDocument.create();
       const [page] = await newPdf.copyPages(pdf, [i]);
       newPdf.addPage(page);
-      zip.file(`page-${i + 1}.pdf`, await newPdf.save());
+      zip.file(`page-${i+1}.pdf`, await newPdf.save());
     }
-    const zipBlob = await zip.generateAsync({ type: "blob" });
-    downloadBlob(zipBlob, "split-pages.zip");
-  } catch (err) { console.error(err); }
-  finally { hideLoader(); }
+    downloadBlob(await zip.generateAsync({type:"blob"}), "pages.zip");
+  } catch (err) { alert(err.message); } finally { hideLoader(); }
 };
 
 /* COMPRESS */
 $("compDrop").onclick = () => $("compIn").click();
-$("compIn").onchange = e => {
-    if(e.target.files.length) {
-        $("compStatus").innerText = `Ready to optimize: ${e.target.files[0].name}`;
-        $("doComp").classList.remove("hidden");
-    }
-};
+$("compIn").onchange = e => { if(e.target.files[0]) { $("compStatus").innerText = e.target.files[0].name; $("doComp").classList.remove("hidden"); } };
 $("doComp").onclick = async () => {
   try {
-    showLoader("Optimizing PDF structure...");
-    const bytes = await $("compIn").files[0].arrayBuffer();
-    const pdf = await PDFLib.PDFDocument.load(bytes);
-    const out = await pdf.save({ useObjectStreams: true });
-    download(out, "compressed.pdf");
-  } catch (err) { console.error(err); }
-  finally { hideLoader(); }
+    showLoader("Compressing...");
+    const pdf = await PDFLib.PDFDocument.load(await $("compIn").files[0].arrayBuffer());
+    download(await pdf.save({useObjectStreams:true}), "compressed.pdf");
+  } finally { hideLoader(); }
 };
 
-/* TEXT EXTRACTION */
+/* CONVERT */
 $("convDrop").onclick = () => $("convIn").click();
-$("convIn").onchange = e => {
-    if(e.target.files.length) {
-        $("convStatus").innerText = `File selected: ${e.target.files[0].name}`;
-        $("doConv").classList.remove("hidden");
-    }
-};
+$("convIn").onchange = e => { if(e.target.files[0]) { $("convStatus").innerText = e.target.files[0].name; $("doConv").classList.remove("hidden"); } };
 $("doConv").onclick = async () => {
   try {
-    showLoader("Reading text content...");
-    const buffer = await $("convIn").files[0].arrayBuffer();
+    showLoader("Extracting...");
+    const pdf = await pdfjsLib.getDocument({data: await $("convIn").files[0].arrayBuffer()}).promise;
+    let text = "";
+    for(let i=1;i<=pdf.numPages;i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      text += content.items.map(item => item.str).join(" ") + "\n\n";
+    }
+    downloadBlob(new Blob([text],{type:"text/plain"}), "text.txt");
+  } finally { hideLoader(); }
+};
+
+/* WORD COUNT LOGIC */
+$("wcArea").oninput = e => {
+  const t = e.target.value;
+  $("wCount").innerText = t.trim() ? t.trim().split(/\s+/).length : 0;
+  $("cCount").innerText = t.length;
+};
+
+// RESTORED WORD COUNT PDF UPLOAD EVENT
+$("wcPdfDrop").onclick = () => $("wcPdfIn").click();
+$("wcPdfIn").onchange = async () => {
+  if (!$("wcPdfIn").files[0]) return;
+  try {
+    showLoader("Counting words...");
+    const buffer = await $("wcPdfIn").files[0].arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
     let text = "";
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i);
       const content = await page.getTextContent();
-      text += content.items.map(item => item.str).join(" ") + "\n\n";
+      text += content.items.map(item => item.str).join(" ") + " ";
     }
-    downloadBlob(new Blob([text], { type: "text/plain" }), "extracted-text.txt");
-  } catch (err) { console.error(err); }
-  finally { hideLoader(); }
+    text = text.replace(/\s+/g, " ").trim();
+    $("wcArea").value = text;
+    $("wCount").innerText = text ? text.split(" ").length : 0;
+    $("cCount").innerText = text.length;
+  } catch (err) {
+    alert("Error reading PDF: " + err.message);
+  } finally {
+    hideLoader();
+  }
 };
 
-/* WORD COUNT */
-$
+/* HELPERS */
+function download(data, name) { downloadBlob(new Blob([data],{type:"application/pdf"}), name); }
+function downloadBlob(blob, name) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+}
+</script>
+</body>
+</html>
+
+  
