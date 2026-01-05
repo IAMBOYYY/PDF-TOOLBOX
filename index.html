@@ -1,112 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- PRIMARY SEO METAS -->
-  <title>PDF Toolbox – Free Online PDF Tools (Merge, Split, Compress & Word Count)</title>
-  <meta name="description" content="Use PDF Toolbox to merge, split, compress, and extract text from PDFs for free. 100% browser-based, private, and secure. No file uploads to servers required." />
-  <meta name="keywords" content="pdf toolbox, merge pdf online, split pdf free, compress pdf browser, pdf word count, extract text from pdf, secure pdf tools" />
-  <meta name="author" content="PDF Toolbox" />
-  <link rel="canonical" href="https://iamboyyy.github.io/PDF-TOOLBOX/" />
+<title>PDF Toolbox – Fancy Browser PDF Tools</title>
 
-  <!-- STRUCTURED DATA (JSON-LD) -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "PDF Toolbox",
-      "description": "A suite of free, browser-based PDF tools including merging, splitting, compression, and word counting.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Tailwind & Fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #f8fafc; scroll-behavior: smooth; }
-    .tool-tab { padding: 10px 20px; border-radius: 999px; background: #e5e7eb; font-weight: 700; transition: all 0.2s; cursor: pointer; white-space: nowrap; }
-    .tool-tab.active { background: #2563eb; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
-    .tool-section { display: none; }
-    .tool-section.active { display: block; animation: fadeIn 0.3s ease-in; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .upload-area { border: 2px dashed #94a3b8; padding: 40px; text-align: center; border-radius: 20px; background: white; cursor: pointer; }
-    .upload-area.dragover { border-color: #2563eb; background: #f0f7ff; }
-    .btn-primary { width: 100%; padding: 16px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 16px; font-weight: 800; }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-  </style>
+<style>
+body{
+  background:linear-gradient(135deg,#e0f2fe,#f8fafc);
+  font-family:Inter,system-ui
+}
+.card{background:#fff;border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.upload{border:2px dashed #94a3b8;padding:40px;border-radius:20px;cursor:pointer;transition:.2s}
+.upload:hover{border-color:#2563eb;background:#eff6ff}
+.btn{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:900;padding:14px;border-radius:16px;width:100%}
+.btn:disabled{opacity:.5}
+.file{display:flex;justify-between;align-items:center;background:#eff6ff;padding:12px;border-radius:14px;cursor:grab}
+.tab{padding:10px 18px;border-radius:999px;font-weight:800}
+.tab.active{background:#2563eb;color:#fff}
+.fade{animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+</style>
 </head>
 
-<body>
+<body class="p-4 max-w-5xl mx-auto">
 
-<!-- UI UNCHANGED ABOVE -->
+<h1 class="text-4xl font-black text-center mb-6">
+PDF <span class="text-blue-600">Toolbox</span>
+</h1>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<div class="flex gap-2 justify-center mb-6 overflow-x-auto">
+<button class="tab active" data-tab="merge">Merge</button>
+<button class="tab" data-tab="split">Split</button>
+<button class="tab" data-tab="compress">Compress</button>
+<button class="tab" data-tab="text">PDF → Text</button>
+<button class="tab" data-tab="count">Word Count</button>
+</div>
+
+<div class="card p-6">
+
+<!-- MERGE -->
+<section id="merge" class="fade">
+<label class="upload block text-center mb-4" for="mergeIn">
+<i class="fa-solid fa-plus text-4xl text-blue-500"></i>
+<p class="font-bold mt-2">Select or Drag PDFs</p>
+</label>
+<input type="file" id="mergeIn" multiple accept=".pdf" hidden>
+
+<div id="mergeList" class="space-y-2"></div>
+
+<button id="mergeBtn" class="btn mt-4" disabled>
+Merge PDFs (<span id="mergeCount">0</span>)
+</button>
+</section>
+
+<!-- SPLIT -->
+<section id="split" class="hidden fade">
+<label class="upload block text-center mb-4" for="splitIn">
+<i class="fa-solid fa-scissors text-4xl text-blue-500"></i>
+<p class="font-bold mt-2">Upload PDF to Split</p>
+</label>
+<input type="file" id="splitIn" accept=".pdf" hidden>
+<button id="splitBtn" class="btn hidden">Split & Download ZIP</button>
+</section>
+
+<!-- COMPRESS -->
+<section id="compress" class="hidden fade">
+<label class="upload block text-center mb-4" for="compIn">
+<i class="fa-solid fa-file-contract text-4xl text-blue-500"></i>
+<p class="font-bold mt-2">Upload PDF to Compress</p>
+</label>
+<input type="file" id="compIn" accept=".pdf" hidden>
+<button id="compBtn" class="btn hidden">Compress PDF</button>
+</section>
+
+<!-- PDF TO TEXT -->
+<section id="text" class="hidden fade">
+<label class="upload block text-center mb-4" for="textIn">
+<i class="fa-solid fa-file-lines text-4xl text-blue-500"></i>
+<p class="font-bold mt-2">Upload PDF</p>
+</label>
+<input type="file" id="textIn" accept=".pdf" hidden>
+<button id="textBtn" class="btn hidden">Extract Text</button>
+</section>
+
+<!-- WORD COUNT -->
+<section id="count" class="hidden fade">
+<textarea id="countArea" class="w-full h-40 border rounded-xl p-4" placeholder="Paste text here..."></textarea>
+<div class="grid grid-cols-2 gap-4 mt-4 text-center">
+<div class="bg-blue-50 rounded-xl p-4">
+<span id="wCount" class="text-3xl font-black text-blue-600">0</span>
+<p class="text-xs font-bold">WORDS</p>
+</div>
+<div class="bg-blue-50 rounded-xl p-4">
+<span id="cCount" class="text-3xl font-black text-blue-600">0</span>
+<p class="text-xs font-bold">CHARS</p>
+</div>
+</div>
+</section>
+
+</div>
+
+<!-- LOADER -->
+<div id="loader" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+<div class="bg-white p-8 rounded-3xl font-bold">
+<span id="loaderText">Working…</span>
+</div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <script>
-const $ = id => document.getElementById(id);
-const pdfjsLib = window['pdfjs-dist/build/pdf'];
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const $=id=>document.getElementById(id)
+const tabs=document.querySelectorAll(".tab")
+const sections=document.querySelectorAll("section")
 
-/* ===========================
-   FIXED MERGE LOGIC ONLY
-   =========================== */
+tabs.forEach(t=>t.onclick=()=>{
+tabs.forEach(x=>x.classList.remove("active"))
+sections.forEach(s=>s.classList.add("hidden"))
+t.classList.add("active")
+$(t.dataset.tab).classList.remove("hidden")
+})
 
-let mergeFiles = [];
+let mergeFiles=[]
 
-$("mergeIn").onchange = e => {
-  const newFiles = [...e.target.files].filter(f => f.type === "application/pdf");
+$("mergeIn").onchange=e=>{
+[...e.target.files].forEach(f=>{
+if(!mergeFiles.some(x=>x.name===f.name&&x.size===f.size))
+mergeFiles.push(f)
+})
+renderMerge()
+e.target.value=""
+}
 
-  newFiles.forEach(file => {
-    const exists = mergeFiles.some(
-      f => f.name === file.name && f.size === file.size
-    );
-    if (!exists) mergeFiles.push(file);
-  });
+function renderMerge(){
+$("mergeList").innerHTML=""
+mergeFiles.forEach((f,i)=>{
+const d=document.createElement("div")
+d.className="file"
+d.draggable=true
+d.dataset.i=i
+d.innerHTML=`<span>📄 ${f.name}</span>
+<button onclick="remove(${i})" class="text-red-600 font-black">✕</button>`
+drag(d)
+$("mergeList").appendChild(d)
+})
+$("mergeCount").innerText=mergeFiles.length
+$("mergeBtn").disabled=mergeFiles.length<2
+}
 
-  $("mergeList").innerHTML = mergeFiles
-    .map(f => `<div class="p-3 bg-blue-50 rounded-xl text-xs font-medium">📄 ${f.name}</div>`)
-    .join("");
+function remove(i){mergeFiles.splice(i,1);renderMerge()}
 
-  $("doMerge").disabled = mergeFiles.length < 2;
+function drag(el){
+el.ondragstart=e=>e.dataTransfer.setData("i",el.dataset.i)
+el.ondragover=e=>e.preventDefault()
+el.ondrop=e=>{
+const f=e.dataTransfer.getData("i")
+mergeFiles.splice(el.dataset.i,0,mergeFiles.splice(f,1)[0])
+renderMerge()
+}
+}
 
-  // IMPORTANT: allow re-uploading again
-  e.target.value = "";
-};
+$("mergeBtn").onclick=async()=>{
+show("Merging PDFs…")
+const pdf=await PDFLib.PDFDocument.create()
+for(let f of mergeFiles){
+const src=await PDFLib.PDFDocument.load(await f.arrayBuffer())
+const pages=await pdf.copyPages(src,src.getPageIndices())
+pages.forEach(p=>pdf.addPage(p))
+}
+save(await pdf.save(),"merged.pdf")
+hide()
+}
 
-$("doMerge").onclick = async () => {
-  try {
-    const mergedPdf = await PDFLib.PDFDocument.create();
+$("splitIn").onchange=()=>$("splitBtn").classList.remove("hidden")
+$("splitBtn").onclick=async()=>{
+show("Splitting…")
+const pdf=await PDFLib.PDFDocument.load(await $("splitIn").files[0].arrayBuffer())
+const zip=new JSZip()
+for(let i=0;i<pdf.getPageCount();i++){
+const p=await PDFLib.PDFDocument.create()
+const [pg]=await p.copyPages(pdf,[i])
+p.addPage(pg)
+zip.file(`page-${i+1}.pdf`,await p.save())
+}
+saveBlob(await zip.generateAsync({type:"blob"}),"pages.zip")
+hide()
+}
 
-    for (const file of mergeFiles) {
-      const pdf = await PDFLib.PDFDocument.load(await file.arrayBuffer());
-      const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-      pages.forEach(p => mergedPdf.addPage(p));
-    }
+$("compIn").onchange=()=>$("compBtn").classList.remove("hidden")
+$("compBtn").onclick=async()=>{
+show("Compressing…")
+const pdf=await PDFLib.PDFDocument.load(await $("compIn").files[0].arrayBuffer())
+save(await pdf.save({useObjectStreams:true}),"compressed.pdf")
+hide()
+}
 
-    const blob = new Blob([await mergedPdf.save()], { type: "application/pdf" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "merged_document.pdf";
-    a.click();
-    URL.revokeObjectURL(a.href);
-  } catch (err) {
-    alert("Merge error: " + err.message);
-  }
-};
+$("textIn").onchange=()=>$("textBtn").classList.remove("hidden")
+$("textBtn").onclick=async()=>{
+show("Extracting text…")
+const pdf=await pdfjsLib.getDocument({data:await $("textIn").files[0].arrayBuffer()}).promise
+let t=""
+for(let i=1;i<=pdf.numPages;i++){
+const p=await pdf.getPage(i)
+const c=await p.getTextContent()
+t+=c.items.map(x=>x.str).join(" ")+"\n\n"
+}
+saveBlob(new Blob([t],{type:"text/plain"}),"text.txt")
+hide()
+}
+
+$("countArea").oninput=e=>{
+const v=e.target.value.trim()
+$("wCount").innerText=v?v.split(/\s+/).length:0
+$("cCount").innerText=e.target.value.length
+}
+
+function show(t){$("loaderText").innerText=t;$("loader").classList.remove("hidden")}
+function hide(){$("loader").classList.add("hidden")}
+function save(d,n){saveBlob(new Blob([d],{type:"application/pdf"}),n)}
+function saveBlob(b,n){
+const a=document.createElement("a")
+a.href=URL.createObjectURL(b)
+a.download=n
+a.click()
+URL.revokeObjectURL(a.href)
+}
 </script>
 
 </body>
